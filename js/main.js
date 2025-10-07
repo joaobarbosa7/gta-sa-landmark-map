@@ -15,6 +15,21 @@ probe.onload = () => {
     wheelPxPerZoomLevel: 120
   });
 
+  const cat = {
+    "Edifícios":  L.layerGroup().addTo(map),
+    "Monumentos": L.layerGroup().addTo(map),
+    "Outros":     L.layerGroup().addTo(map),
+  };
+  const areas = {
+  "Áreas azuis":  L.layerGroup().addTo(map),
+  "Áreas roxas":  L.layerGroup().addTo(map),
+  };
+  const STYLE = {
+  azul: { color:"#2f7ed8", weight:3, fillColor:"#2f7ed8", fillOpacity:.15, interactive:false },
+  roxo: { color:"#7e57c2", weight:3, fillColor:"#7e57c2", fillOpacity:.15, interactive:false },
+  };
+
+
   const lb   = document.getElementById("lb");
   const lbimg= document.getElementById("lbimg");
   const prev  = document.getElementById("lbprev");
@@ -38,7 +53,10 @@ probe.onload = () => {
   const atlas = L.imageOverlay(ATLAS_URL, bounds, { interactive:false }).addTo(map);
   const sat   = L.imageOverlay(SAT_URL,   bounds, { interactive:false });
 
-  L.control.layers({ "Mapa": atlas, "Satélite": sat }, {}, { position:"topright", collapsed:true }).addTo(map);
+  const base = { "Mapa": atlas, "Satélite": sat };
+  const overlays = { ...cat, ...areas }; // categorias + áreas
+  L.control.layers(base, overlays, { position:"topright", collapsed:true }).addTo(map);
+
 
   const container = map.getContainer();
   container.style.background = OCEAN_ATLAS;
@@ -106,6 +124,15 @@ probe.onload = () => {
   · <a href="https://earth.google.com/web/search/Griffith+Observatory" target="_blank" rel="noopener">Google Earth</a>
   · <a href="https://gta.fandom.com/wiki/Los_Santos_Observatory" target="_blank" rel="noopener">GTA Wiki</a>`;
 
-  addPin(4191, 985, "Los Santos Observatory", html);
+  addPin(4191, 985, "Los Santos Observatory", html, { layer: cat["Edifícios"] });
+  const poly = L.polygon(
+  [[3000,3400],[3100,3600],[2950,3800]],
+  { ...STYLE.azul, interactive: true }
+  )
+  .addTo(areas["Áreas azuis"])
+  .bindPopup("<strong>Área florestal</strong>");
+
+  poly.on("click", e => poly.openPopup(e.latlng));
+
   enableCoordClick();
 };

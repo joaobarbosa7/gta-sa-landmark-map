@@ -8,10 +8,13 @@ export function setupPins(map) {
     popupAnchor: [0, -22]
   });
 
-  function addPin(x, y, title, html = "") {
-  return L.marker([y, x], { icon: defaultIcon }).addTo(layer)
-    .bindPopup(`<h3 class="popup-title">${title}</h3>${html}`, { maxWidth: 520 });
- }
+  function addPin(x, y, title, html="", opts={}) {
+  const target = opts.layer || layer;              // <— layer da categoria
+  return L.marker([y,x], { icon: opts.icon || defaultIcon })
+    .addTo(target)
+    .bindPopup(`<h3 class="popup-title">${title}</h3>${html}`, {maxWidth:520});
+  }
+
 
 
   function enableCoordClick() {
