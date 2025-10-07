@@ -1,0 +1,15 @@
+html, body, #map { height: 100%; margin: 0; }
+.leaflet-container { background: #728aae; } /* atlas */
+.leaflet-popup-content { max-width: 520px; }
+.leaflet-popup-content img{ width:100%; height:auto; display:block; border-radius:8px; }
+.popup-title { margin:0 0 6px; font:600 16px/1.2 system-ui; }
+.gallery { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin:6px 0; }
+.gallery img { width:100%; height:auto; border-radius:6px; display:block; }
+.meta { font:13px/1.4 system-ui; margin:6px 0; }
+.links a { margin-right:8px; }
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:10000}
+.lb.show{display:flex}
+.lb img{max-width:95vw;max-height:95vh;border-radius:8px}
+.leaflet-popup-content img{width:100%;height:auto;display:block;border-radius:8px}
+.zoomable { cursor: zoom-in; }
+.lb.show  { cursor: zoom-out; }
