@@ -66,7 +66,7 @@ probe.onload = () => {
 
   const html = `
   <div class="gallery">
-    <img class="zoomable" src="assets/LSobservatory.webp" alt="In-game 1" referrerpolicy="no-referrer" loading="lazy">
+    <img class="zoomable" src="assets/LSobservatory.jpg" alt="In-game 1" referrerpolicy="no-referrer" loading="lazy">
     <img class="zoomable" src="assets/Griffith_observatory.jpg" alt="real1">
   
   </div>
